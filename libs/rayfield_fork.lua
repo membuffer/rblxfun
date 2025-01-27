@@ -563,7 +563,7 @@ local CoreGui = game:GetService("CoreGui")
 
 -- Interface Management
 
-local Rayfield = useStudio and script.Parent:FindFirstChild('Rayfield') or loadstring(game:HttpGet("https://raw.githubusercontent.com/membuffer/rblxfun/refs/heads/main/libs/guiBase.lua")))()
+local Rayfield = useStudio and script.Parent:FindFirstChild('Rayfield') or loadstring(game:HttpGet("https://raw.githubusercontent.com/membuffer/rblxfun/refs/heads/main/libs/guiBase.lua"))()
 local buildAttempts = 0
 local correctBuild = false
 local warned
