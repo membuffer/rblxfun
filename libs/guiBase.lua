@@ -1,7 +1,23 @@
--- Gui to Lua
--- Version: 3.2
+-- ASSETS
+local memAssets = {
+    ["logo"] = {
+        resourceURL = "https://github.com/membuffer/rblxfun/blob/main/libs/menu_logo.png?raw=true",
+        filename = "logo.png"
+    }
+}
+if not isfolder("membuffer") then
+    makefolder("membuffer")
+end
+if not isfolder("membuffer/assets") then
+    makefolder("membuffer/assets")
+end
+function fetchData(resourceName)
+    if not isfile("membuffer/assets/" .. memAssets[resourceName].filename) then
+        writefile("membuffer/assets/" .. memAssets[resourceName].filename, httpget(memAssets[resourceName].resourceURL))
+    end
+    return getcustomasset("membuffer/assets/" .. memAssets[resourceName].filename)
+end
 
--- Instances:
 
 local Rayfield = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
@@ -2042,7 +2058,7 @@ Title_23.AnchorPoint = Vector2.new(0.5, 0.5)
 Title_23.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Title_23.BackgroundTransparency = 1.000
 Title_23.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Title_23.BorderSizePixel = 0
+Title_23.BorderSizePixel = 0    
 Title_23.LayoutOrder = 1
 Title_23.Position = UDim2.new(0.5, 0, 0.5, 0)
 Title_23.Font = Enum.Font.Unknown
@@ -2057,7 +2073,7 @@ Logo.BackgroundTransparency = 1.000
 Logo.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Logo.BorderSizePixel = 0
 Logo.Size = UDim2.new(0, 80, 0, 80)
-Logo.Image = "rbxassetid://14317581285"
+Logo.Image = fetchData(memAssets["logo"])
 
 UIListLayout_8.Parent = Loading
 UIListLayout_8.FillDirection = Enum.FillDirection.Horizontal
