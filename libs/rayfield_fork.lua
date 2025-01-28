@@ -7,6 +7,8 @@
 	iRay  | Programming
 	Max   | Programming
 
+	Thanks to the Rayfield Devs ^^^^^ For working on this interface.
+	Find '--MEMBUFFER SECTION--' to see my modifications.
 ]]
 
 if debugX then
@@ -563,33 +565,31 @@ local CoreGui = game:GetService("CoreGui")
 
 -- Interface Management
 
-local Rayfield = useStudio and script.Parent:FindFirstChild('Rayfield') or loadstring(game:HttpGet("https://raw.githubusercontent.com/membuffer/rblxfun/refs/heads/main/libs/guiBase.lua"))()
+local Rayfield = useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects("rbxassetid://10804731440")[1]
 local buildAttempts = 0
 local correctBuild = false
 local warned
 local globalLoaded
 
-correctBuild = true
+repeat
+	if Rayfield:FindFirstChild('Build') and Rayfield.Build.Value == InterfaceBuild then
+		correctBuild = true
+		break
+	end
 
--- repeat
--- 	if Rayfield:FindFirstChild('Build') and Rayfield.Build.Value == InterfaceBuild then
--- 		correctBuild = true
--- 		break
--- 	end
+	correctBuild = false
 
--- 	correctBuild = false
+	if not warned then
+		warn('Rayfield | Build Mismatch')
+		print('Rayfield may encounter issues as you are running an incompatible interface version ('.. ((Rayfield:FindFirstChild('Build') and Rayfield.Build.Value) or 'No Build') ..').\n\nThis version of Rayfield is intended for interface build '..InterfaceBuild..'.')
+		warned = true
+	end
 
--- 	if not warned then
--- 		warn('Rayfield | Build Mismatch')
--- 		print('Rayfield may encounter issues as you are running an incompatible interface version ('.. ((Rayfield:FindFirstChild('Build') and Rayfield.Build.Value) or 'No Build') ..').\n\nThis version of Rayfield is intended for interface build '..InterfaceBuild..'.')
--- 		warned = true
--- 	end
+	toDestroy, Rayfield = Rayfield, useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects("rbxassetid://10804731440")[1]
+	if toDestroy and not useStudio then toDestroy:Destroy() end
 
--- 	toDestroy, Rayfield = Rayfield, useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects("rbxassetid://10804731440")[1]
--- 	if toDestroy and not useStudio then toDestroy:Destroy() end
-
--- 	buildAttempts = buildAttempts + 1
--- until buildAttempts >= 2
+	buildAttempts = buildAttempts + 1
+until buildAttempts >= 2
 
 Rayfield.Enabled = false
 
@@ -653,6 +653,36 @@ LoadingFrame.Version.Text = Release
 
 -- Thanks to Latte Softworks for the Lucide integration for Roblox
 local Icons = useStudio and require(script.Parent.icons) or loadstring(game:HttpGet('https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/refs/heads/main/icons.lua'))()
+
+--MEMBUFFER SECTION--
+local memAssets = {
+    ["logo"] = {
+        resourceURL = "https://github.com/membuffer/rblxfun/blob/main/libs/menu_logo.png?raw=true",
+        filename = "logo.png"
+    },
+    ["banner"] = {
+        resourceURL = "https://github.com/membuffer/rblxfun/blob/main/libs/membuf.png?raw=true",
+        filename = "membufferbanner.png"
+    }
+}
+if not isfolder("membuffer") then
+    makefolder("membuffer")
+end
+if not isfolder("membuffer/assets") then
+    makefolder("membuffer/assets")
+end
+function memAssets:fetch(resourceName)
+    if not isfile("membuffer/assets/" .. memAssets[resourceName].filename) then
+        writefile("membuffer/assets/" .. memAssets[resourceName].filename, game:HttpGet(memAssets[resourceName].resourceURL))
+    end
+    return getcustomasset("membuffer/assets/" .. memAssets[resourceName].filename)
+end
+
+-- Patch with my logo 
+Rayfield.Loading.Title.Visible = false
+Rayfield.Loading.Logo.Image = memAssets:fetch("logo")
+
+--MEMBUFFER SECTION END--
 
 -- Variables
 
@@ -2324,6 +2354,45 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return DividerValue
 		end
+
+        --MEMBUFFER SECTION--
+        -- Image
+        function Tab:CreateImage(ImageURL, Height)
+            local ImageFrame = Instance.new("Frame")
+            ImageFrame.Name = "Image"
+            ImageFrame.Parent = TabPage
+            ImageFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            ImageFrame.BackgroundTransparency = 1.000
+            ImageFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
+            ImageFrame.BorderSizePixel = 0
+            ImageFrame.Size = UDim2.new(1, -10, 0, 80 + Height)
+
+            local UICorner = Instance.new("UICorner")
+            UICorner.CornerRadius = UDim.new(0, 9)
+            UICorner.Parent = ImageFrame
+
+            local ImageLabel = Instance.new("ImageLabel")
+            ImageLabel.Parent = ImageFrame
+            ImageLabel.BackgroundTransparency = 1
+            ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            ImageLabel.BorderSizePixel = 0
+            ImageLabel.Size = UDim2.new(1, 0, 1, 0)
+            ImageLabel.Image = ImageURL
+            ImageLabel.ScaleType = "Fit"
+
+            local UIStroke = Instance.new("UIStroke")
+            UIStroke.Thickness = 0
+            UIStroke.Parent = ImageFrame
+
+            local Title = Instance.new("TextLabel")
+            Title.Text = ""
+            Title.Name = "Title"
+            Title.Visible = false
+            Title.Parent = ImageFrame
+            Title.Size =  UDim2.new(0,0,0,0)
+            Title.BackgroundTransparency = 1
+        end
+        --MEMBUFFER SECTION END--
 
 		-- Label
 		function Tab:CreateLabel(LabelText : string, Icon: number, Color : Color3, IgnoreTheme : boolean)
