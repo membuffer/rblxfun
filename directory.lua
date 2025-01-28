@@ -13,7 +13,7 @@ local membuffer_scripts = {
 }
 
 function membuffer_scripts:URLConstructor( scriptRequest )
-    local constructedURL = membuffer_scripts.availableScripts
+    local constructedURL = membuffer_scripts.baseURL
 
     constructedURL = constructedURL .. membuffer_scripts.scriptFolder
     constructedURL = constructedURL .. membuffer_scripts.availableScripts[scriptRequest]
