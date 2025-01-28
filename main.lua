@@ -40,7 +40,7 @@ function memAssets:fetch(resourceName)
     return getcustomasset("membuffer/assets/" .. memAssets[resourceName].filename)
 end
 
-local Rayfield = loadstring(readfile("membuffermenu.lua"))()
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/membuffer/rblxfun/refs/heads/main/libs/rayfield_fork.lua"))()
 
 local Window = Rayfield:CreateWindow({
     Name = "membuffer Menu",
