@@ -2084,5 +2084,12 @@ UIListLayout_8.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout_8.VerticalAlignment = Enum.VerticalAlignment.Center
 UIListLayout_8.Padding = UDim.new(0, 5)
 
+
+local UIStroke = Instance.new("UIStroke")
+UIStroke.Color = Color3.new(85, 85, 85)
+UIStroke.Thickness = 1
+UIStroke.Transparency = 0.5
+UIStroke.Parent = Template_3
+
 -- Return Object Reference
 return game:GetService("CoreGui")["Rayfield"]
