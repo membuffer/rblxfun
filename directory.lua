@@ -24,3 +24,5 @@ function membuffer_scripts:Load(scriptName)
     local URL = membuffer_scripts:URLConstructor(scriptName)
     loadstring(game:HttpGet(URL))()
 end
+
+return membuffer_scripts
