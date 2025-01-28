@@ -13,7 +13,7 @@ if not isfolder("membuffer/assets") then
 end
 function fetchData(resourceName)
     if not isfile("membuffer/assets/" .. memAssets[resourceName].filename) then
-        writefile("membuffer/assets/" .. memAssets[resourceName].filename, httpget(memAssets[resourceName].resourceURL))
+        writefile("membuffer/assets/" .. memAssets[resourceName].filename, game:HttpGet(memAssets[resourceName].resourceURL))
     end
     return getcustomasset("membuffer/assets/" .. memAssets[resourceName].filename)
 end
@@ -2073,7 +2073,7 @@ Logo.BackgroundTransparency = 1.000
 Logo.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Logo.BorderSizePixel = 0
 Logo.Size = UDim2.new(0, 80, 0, 80)
-Logo.Image = fetchData(memAssets["logo"])
+Logo.Image = fetchData("logo")
 
 UIListLayout_8.Parent = Loading
 UIListLayout_8.FillDirection = Enum.FillDirection.Horizontal
