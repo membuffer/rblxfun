@@ -204,6 +204,8 @@ local Title_23 = Instance.new("TextLabel")
 local Logo = Instance.new("ImageLabel")
 local UIListLayout_8 = Instance.new("UIListLayout")
 
+local shadowtitle = Instance.new("TextLabel")
+
 --Properties:
 
 Rayfield.Name = "Rayfield"
@@ -2082,4 +2084,5 @@ UIListLayout_8.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout_8.VerticalAlignment = Enum.VerticalAlignment.Center
 UIListLayout_8.Padding = UDim.new(0, 5)
 
-return Rayfield
+-- Return Object Reference
+return game:GetService("CoreGui")["Rayfield"]
