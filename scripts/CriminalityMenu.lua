@@ -110,7 +110,7 @@ end
 local Window = Rayfield:CreateWindow({
     Name = "Criminality Menu // by membuffer",
     LoadingTitle = "Made by membuffer",
-    LoadingSubtitle = "Developed on and for Nihon",
+    LoadingSubtitle = "Using a fork of Rayfield",
     DisableRayfieldPrompts = true
 })
 
@@ -479,3 +479,7 @@ ESPTab:CreateToggle({
 
 -- Credits
 local CreditsTab = Window:CreateTab("Credits")
+CreditsTab:CreateParagraph({
+    Title = "Credits", 
+    Content = "Made by membuffer. Thanks to creators of Rayfield for the graphical interface.\nBuild 2/2/2025"
+})
