@@ -8,7 +8,8 @@ local membuffer_scripts = {
         ["Gunfight Arena"] = "gunfightarena.lua",
         ["Jujutsu Infinite"] = "jujutsuinfinite.lua",
         ["Pressure"] = "pressure.lua",
-        ["Regretevator"] = "regretevator.lua"
+        ["Regretevator"] = "regretevator.lua",
+        ["Criminality"] = "CriminalityMenu.lua"
     }
 
 }
